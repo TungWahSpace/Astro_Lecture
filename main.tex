@@ -1,0 +1,104 @@
+\documentclass[a4paper,10pt,twoside,openany]{ctexbook}
+
+\usepackage{imakeidx}
+\usepackage{siunitx}
+\usepackage{multicol}
+\usepackage[
+    left=2cm,right=2cm,
+    top=3cm,bottom=2.5cm
+]{geometry}
+\usepackage{subfiles}
+\usepackage{titletoc}
+% \titlecontents{section}
+\setcounter{tocdepth}{3}
+\usepackage{hyperref}
+% \usepackage[utf8]{inputenc}
+% \usepackage[russian]{babel}
+% \usepackage[T2A]{fontenc}
+
+\usepackage{fontspec}
+\setmainfont{CMU Serif}
+
+\usepackage[titles]{tocloft}
+\renewcommand{\cftdot}{$\cdot$}
+\renewcommand{\cftdotsep}{1.5}
+\setlength{\cftbeforechapskip}{10pt}
+
+\renewcommand{\cftchapleader}{\cftdotfill{\cftchapdotsep}}
+\renewcommand{\cftchapdotsep}{\cftdotsep}
+\makeatletter
+\renewcommand{\numberline}[1]{%
+\settowidth\@tempdimb{#1\hspace{0.5em}}%
+\ifdim\@tempdima<\@tempdimb%
+  \@tempdima=\@tempdimb%
+\fi%
+\hb@xt@\@tempdima{\@cftbsnum #1\@cftasnum\hfil}\@cftasnumb}
+\makeatother
+
+\renewcommand{\contentsname}{目\hspace{1em}录}
+\newcommand{\introduction}[1]{
+    \begin{quotation}
+        \kaishu#1
+    \end{quotation}
+}
+\newcommand{\Text}[1]{
+    \songti
+    \begin{multicols*}{2}
+        #1
+    \end{multicols*}
+}
+
+
+\begin{document}
+    \begin{titlepage}
+        \subfile{title}
+    \end{titlepage}
+    \newpage
+    \begin{multicols*}{2}
+        \begin{center}
+            \tableofcontents
+            \thispagestyle{empty}
+        \end{center}
+    \end{multicols*}
+    
+    
+    \pagenumbering{arabic}    
+    
+    \include{chapters/introduction}
+    
+    \part{观测}{
+        \include{chapters/obs_introduction}
+        \include{chapters/sphere}
+        \include{chapters/obs_guide}
+        \include{chapters/surface_obs}
+        \include{chapters/instrument}
+        \include{chapters/data}
+    }
+
+    \part{天体物理学}{
+        \include{chapters/orbit}
+        \include{chapters/radiation}
+        \include{chapters/thermal}
+    }
+
+    \part{天体}{
+        \include{chapters/solar_sys}
+        \include{chapters/stella}
+        \include{chapters/sun}
+        \include{chapters/bin_stella}
+        \include{chapters/var_stella}
+        \include{chapters/hd_stella}
+        \include{chapters/interstella}
+        \include{chapters/cluster}
+        \include{chapters/milky_way}
+        \include{chapters/galaxy}
+        \include{chapters/exoplanet}
+    }
+
+    \part{扩展}{
+        \include{chapters/cosmos}
+        \include{chapters/astrobiology}
+    }
+    
+    
+\end{document}
